@@ -1,0 +1,144 @@
+[*] Action: Find certificate templates
+[*] Using current user's unrolled group SIDs for vulnerability checks.
+[*] Using the search base 'CN=Configuration,DC=valhalla,DC=corp'
+
+[*] Listing info about the Enterprise CA 'SRV03-Root-CA-01'
+
+    Enterprise CA Name            : SRV03-Root-CA-01
+    DNS Hostname                  : SRV03.valhalla.corp
+    FullName                      : SRV03.valhalla.corp\SRV03-Root-CA-01
+    Flags                         : SUPPORTS_NT_AUTHENTICATION, CA_SERVERTYPE_ADVANCED
+    Cert SubjectName              : CN=SRV03-Root-CA-01, DC=valhalla, DC=corp
+    Cert Thumbprint               : 0402C55ABA2D4C63DCEC5AC750070CBF2F8C49C0
+    Cert Serial                   : 196AF82F708467AC4D0B9EC6EB319C44
+    Cert Start Date               : 8/1/2023 10:46:37 AM
+    Cert End Date                 : 8/1/2028 10:56:37 AM
+    Cert Chain                    : CN=SRV03-Root-CA-01,DC=valhalla,DC=corp
+    UserSpecifiedSAN              : Disabled
+    CA Permissions                :
+      Owner: BUILTIN\Administrators        S-1-5-32-544
+
+      Access Rights                                     Principal
+
+      Allow  Enroll                                     NT AUTHORITY\Authenticated UsersS-1-5-11
+      Allow  ManageCA, ManageCertificates               BUILTIN\Administrators        S-1-5-32-544
+      Allow  ManageCA, ManageCertificates               VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+      Allow  ManageCA, ManageCertificates               VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+    Enrollment Agent Restrictions : None
+
+[!] Vulnerable Certificates Templates :
+
+    CA Name                               : SRV03.valhalla.corp\SRV03-Root-CA-01
+    Template Name                         : ESC1
+    Schema Version                        : 2
+    Validity Period                       : 1 year
+    Renewal Period                        : 6 weeks
+    msPKI-Certificate-Name-Flag          : ENROLLEE_SUPPLIES_SUBJECT
+    mspki-enrollment-flag                 : INCLUDE_SYMMETRIC_ALGORITHMS, PUBLISH_TO_DS
+    Authorized Signatures Required        : 0
+    pkiextendedkeyusage                   : Client Authentication, Encrypting File System, Secure Email
+    mspki-certificate-application-policy  : Client Authentication, Encrypting File System, Secure Email
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights           : VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+      Object Control Permissions
+        Owner                       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+        WriteOwner Principals       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteDacl Principals        : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteProperty Principals    : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+
+    CA Name                               : SRV03.valhalla.corp\SRV03-Root-CA-01
+    Template Name                         : ESC2
+    Schema Version                        : 2
+    Validity Period                       : 1 year
+    Renewal Period                        : 6 weeks
+    msPKI-Certificate-Name-Flag          : SUBJECT_ALT_REQUIRE_UPN, SUBJECT_REQUIRE_DIRECTORY_PATH
+    mspki-enrollment-flag                 : INCLUDE_SYMMETRIC_ALGORITHMS, PUBLISH_TO_DS, AUTO_ENROLLMENT
+    Authorized Signatures Required        : 0
+    pkiextendedkeyusage                   : Any Purpose
+    mspki-certificate-application-policy  : Any Purpose
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights           : VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+      Object Control Permissions
+        Owner                       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+        WriteOwner Principals       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteDacl Principals        : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteProperty Principals    : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+
+    CA Name                               : SRV03.valhalla.corp\SRV03-Root-CA-01
+    Template Name                         : ESC3
+    Schema Version                        : 2
+    Validity Period                       : 1 year
+    Renewal Period                        : 6 weeks
+    msPKI-Certificate-Name-Flag          : SUBJECT_ALT_REQUIRE_UPN, SUBJECT_REQUIRE_DIRECTORY_PATH
+    mspki-enrollment-flag                 : INCLUDE_SYMMETRIC_ALGORITHMS, PUBLISH_TO_DS, AUTO_ENROLLMENT
+    Authorized Signatures Required        : 0
+    pkiextendedkeyusage                   : Certificate Request Agent
+    mspki-certificate-application-policy  : Certificate Request Agent
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights           : VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+      Object Control Permissions
+        Owner                       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+        WriteOwner Principals       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteDacl Principals        : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteProperty Principals    : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+
+    CA Name                               : SRV03.valhalla.corp\SRV03-Root-CA-01
+    Template Name                         : ESC4
+    Schema Version                        : 2
+    Validity Period                       : 1 year
+    Renewal Period                        : 6 weeks
+    msPKI-Certificate-Name-Flag          : SUBJECT_ALT_REQUIRE_UPN, SUBJECT_ALT_REQUIRE_EMAIL, SUBJECT_REQUIRE_EMAIL, SUBJECT_REQUIRE_DIRECTORY_PATH
+    mspki-enrollment-flag                 : INCLUDE_SYMMETRIC_ALGORITHMS, PUBLISH_TO_DS, AUTO_ENROLLMENT
+    Authorized Signatures Required        : 0
+    pkiextendedkeyusage                   : Client Authentication, Encrypting File System, Secure Email
+    mspki-certificate-application-policy  : Client Authentication, Encrypting File System, Secure Email
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights           : VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+      Object Control Permissions
+        Owner                       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+        WriteOwner Principals       : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteDacl Principals        : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+        WriteProperty Principals    : VALHALLA\d.admin              S-1-5-21-3153580153-2958537827-2964666397-1246
+                                      VALHALLA\Domain Admins        S-1-5-21-3153580153-2958537827-2964666397-512
+                                      VALHALLA\Domain Users         S-1-5-21-3153580153-2958537827-2964666397-513
+                                      VALHALLA\Enterprise Admins    S-1-5-21-3153580153-2958537827-2964666397-519
+
+
+
+Certify completed in 00:00:00.4674778

@@ -31,6 +31,18 @@ Weight: 75.5
 Scores: 90, 80, 85
 Grades: 3.6, 3.7, 4.0
 
+Name: James
+Surname: Johnson
+Age: 37
+Colors: green, blue, green
+		
+Foo: Boo
+Goo: Coo
+
+Weight: 80.5
+Scores: 50, 80, 85
+Grades: 3.6, 3.7, 4.0
+
 `
 
 	expected := map[string]interface{}{
@@ -48,7 +60,7 @@ Grades: 3.6, 3.7, 4.0
 		t.Errorf("expected no error, got %v", err)
 	}
 
-	if !reflect.DeepEqual(result, expected) {
+	if !reflect.DeepEqual(result[0], expected) {
 		t.Errorf("expected %v, got %v", expected, result)
 	}
 }
