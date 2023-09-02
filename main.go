@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-// Parse parses the target string using the given format and returns a map of captures.
 func Parse(format, target string) (map[string]interface{}, error) {
 	// Convert special syntax into regular expressions
 	format = regexp.MustCompile(`{:s:(\w+)}`).ReplaceAllString(format, `(?P<${1}_s>\w+)`)
@@ -64,35 +63,4 @@ func Parse(format, target string) (map[string]interface{}, error) {
 	}
 
 	return result, nil
-}
-
-func main() {
-	format := `Name: {:s:Name}
-Surname: {:s:Surname}
-Age: {:d:Age}
-Colors: {:a:Colors}
-{:i}
-Weight: {:f:Weight}
-Scores: {:ad:Scores}
-Grades: {:af:Grades}`
-
-	target := `Name: John
-Surname: Wayne
-Age: 30
-Colors: red, blue, green
-irrelevant
-
-fjsdlfksd
-djklfksdjf
-
-xd
-Weight: 75.5
-Scores: 90, 80, 85
-Grades: 3.6, 3.7, 4.0`
-
-	captures, err := Parse(format, target)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(captures)
 }
