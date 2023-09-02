@@ -6,12 +6,13 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	format := `Name: {:s:Name}
+	format := `
+Name: {:s:Name}
 Surname: {:s:Surname}
 Age: {:d:Age}
 Colors: {:a:Colors}
 {:i}
-	Weight: {:f:Weight}
+Weight: {:f:Weight}
 Scores: {:ad:Scores}
 Grades: {:af:Grades}`
 
@@ -22,11 +23,11 @@ Name: John
 Surname: Wayne
 Age: 30
 Colors: red, blue, green
-
+		
 Foo: Boo
 Goo: Coo
 
-	Weight: 75.5
+Weight: 75.5
 Scores: 90, 80, 85
 Grades: 3.6, 3.7, 4.0
 
