@@ -8,17 +8,24 @@ import (
 )
 
 // Parse parses the target string using the given format and returns a map of captures.
-func Parse(format, target string) map[string]interface{} {
+func Parse(format, target string) (map[string]interface{}, error) {
 	// Convert special syntax into regular expressions
 	format = regexp.MustCompile(`{:s:(\w+)}`).ReplaceAllString(format, `(?P<${1}_s>\w+)`)
 	format = regexp.MustCompile(`{:d:(\w+)}`).ReplaceAllString(format, `(?P<${1}_d>\d+)`)
-	format = regexp.MustCompile(`{:f:(\w+)}`).ReplaceAllString(format, `(?P<${1}_f>\d+(\.\d+)?)`)
+	format = regexp.MustCompile(`{:f:(\w+)}`).ReplaceAllString(format, `(?P<${1}_f>\d+(\.\d+))`)
 	format = regexp.MustCompile(`{:ad:(\w+)}`).ReplaceAllString(format, `(?P<${1}_ad>(\d+, )*\d+)`)
-	format = regexp.MustCompile(`{:af:(\w+)}`).ReplaceAllString(format, `(?P<${1}_af>(\d+(\.\d+)?, )*\d+(\.\d+)?)`)
+	format = regexp.MustCompile(`{:af:(\w+)}`).ReplaceAllString(format, `(?P<${1}_af>(\d+(\.\d+), )*\d+(\.\d+))`)
 	format = regexp.MustCompile(`{:a:(\w+)}`).ReplaceAllString(format, `(?P<${1}_a>(\w+, )*\w+)`)
+	//format = regexp.MustCompile(`{:X}`).ReplaceAllString(format, `(?:.*\n)*.*`)
+	//format = regexp.MustCompile(`{:X}`).ReplaceAllString(format, `(?:.*\n?)*`)
+	format = regexp.MustCompile(`{:i}`).ReplaceAllString(format, `(?:.|\n)*`)
 
 	re := regexp.MustCompile(format)
 	match := re.FindStringSubmatch(target)
+
+	if match == nil {
+		return nil, fmt.Errorf("no match")
+	}
 
 	result := make(map[string]interface{})
 	for i, name := range re.SubexpNames() {
@@ -56,13 +63,36 @@ func Parse(format, target string) map[string]interface{} {
 		}
 	}
 
-	return result
+	return result, nil
 }
 
 func main() {
-	format := `Name: {:s:name}, Surname: {:s:surname}, Age: {:d:age}, Colors: {:a:colors}, Weight: {:f:weight}, Scores: {:ad:scores}, Grades: {:af:grades}`
-	target := `Name: John, Surname: Wayne, Age: 30, Colors: red, blue, green, Weight: 70.5, Scores: 10, 20, 30, Grades: 3.5, 4.0, 3.8`
+	format := `Name: {:s:Name}
+Surname: {:s:Surname}
+Age: {:d:Age}
+Colors: {:a:Colors}
+{:i}
+Weight: {:f:Weight}
+Scores: {:ad:Scores}
+Grades: {:af:Grades}`
 
-	captures := Parse(format, target)
+	target := `Name: John
+Surname: Wayne
+Age: 30
+Colors: red, blue, green
+irrelevant
+
+fjsdlfksd
+djklfksdjf
+
+xd
+Weight: 75.5
+Scores: 90, 80, 85
+Grades: 3.6, 3.7, 4.0`
+
+	captures, err := Parse(format, target)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println(captures)
 }
