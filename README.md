@@ -16,14 +16,7 @@ To install the parsenip package, run the following command:
 Here's an example of how to use the `Parse` function:
 
 ```go
-package main
-
-import (
-	"fmt"
-	"github.com/ibrahim-koz/parsenip"
-)
-
-func main() {
+func TestParse(t *testing.T) {
 	format := `
 Name: {:s:Name}
 Surname: {:s:Surname}
@@ -63,13 +56,35 @@ Grades: 3.6, 3.7, 4.0
 
 `
 
-	result, err := parsenip.Parse(format, target)
-	if err != nil {
-		fmt.Println(err)
-		return
+	expected := []map[string]interface{}{
+		{
+			"Name":    "John",
+			"Surname": "Wayne",
+			"Age":     30,
+			"Colors":  []string{"red", "blue", "green"},
+			"Weight":  75.5,
+			"Scores":  []int{90, 80, 85},
+			"Grades":  []float64{3.6, 3.7, 4.0},
+		},
+		{
+			"Name":    "James",
+			"Surname": "Johnson",
+			"Age":     37,
+			"Colors":  []string{"green", "blue", "green"},
+			"Weight":  80.5,
+			"Scores":  []int{50, 80, 85},
+			"Grades":  []float64{3.6, 3.7, 4.0},
+		},
 	}
 
-	fmt.Println(result)
+	result, err := Parse(format, target)
+	if err != nil {
+		t.Errorf("expected no error, got %v", err)
+	}
+
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("expected %v, got %v", expected, result)
+	}
 }
 ```
 
