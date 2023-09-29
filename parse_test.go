@@ -138,3 +138,39 @@ func TestParseOnTestLog(t *testing.T) {
 		t.Errorf("expected %v, got %v", expected, result)
 	}
 }
+
+func TestParseWithSpecialCharacters(t *testing.T) {
+	format := `
+\{:s:Name\}
+.*^Name: {:s:Name}$
+*+Surname: {:s:Surname}?()[]|
+Age: {:d:Age}
+Colors: {:a:Colors}`
+
+	target := `
+{:s:Name}
+.*^Name: John$
+*+Surname: Wayne?()[]|
+Age: 30
+Colors: red, blue, green`
+
+	expected := map[string]interface{}{
+		"Name":    "John",
+		"Surname": "Wayne",
+		"Age":     30,
+		"Colors":  []string{"red", "blue", "green"},
+	}
+
+	results, err := Parse(format, target)
+	if err != nil {
+		t.Errorf("expected no error, got %v", err)
+	}
+
+	if len(results) == 0 {
+		t.Fatal("No results found.")
+	}
+
+	if !reflect.DeepEqual(results[0], expected) {
+		t.Errorf("expected %v, got %v", expected, results[0])
+	}
+}
