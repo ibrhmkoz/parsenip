@@ -19,14 +19,15 @@ func Parse(format, target string) ([]map[string]interface{}, error) {
 	}
 
 	// Process custom tags as before
-	format = regexp.MustCompile(`{:s:(\w+)}`).ReplaceAllString(format, `(?P<${1}_s>.+)`)
-	format = regexp.MustCompile(`{:d:(\w+)}`).ReplaceAllString(format, `(?P<${1}_d>\d+)`)
+	format = regexp.MustCompile(`{:s:(\w+)}`).ReplaceAllString(format, `(?P<${1}_s>.+?)`)
+	format = regexp.MustCompile(`{:d:(\w+)}`).ReplaceAllString(format, `(?P<${1}_d>\d+?)`)
 	format = regexp.MustCompile(`{:f:(\w+)}`).ReplaceAllString(format, `(?P<${1}_f>\d+(\.\d+)?)`)
-	format = regexp.MustCompile(`{:ad:(\w+)}`).ReplaceAllString(format, `(?P<${1}_ad>(\d+, )*\d+)`)
-	format = regexp.MustCompile(`{:af:(\w+)}`).ReplaceAllString(format, `(?P<${1}_af>(\d+(\.\d+), )*\d+(\.\d+))`)
+	format = regexp.MustCompile(`{:ad:(\w+)}`).ReplaceAllString(format, `(?P<${1}_ad>(\d+, )*\d+?)`)
+	format = regexp.MustCompile(`{:af:(\w+)}`).ReplaceAllString(format, `(?P<${1}_af>(\d+(\.\d+), )*\d+(\.\d+))?`)
 	format = regexp.MustCompile(`{:a:(\w+)}`).ReplaceAllString(format, `(?P<${1}_a>.+)`)
 	format = regexp.MustCompile(`{:i}`).ReplaceAllString(format, `(?:.|\n)*?`)
 	format = regexp.MustCompile(`{:e}`).ReplaceAllString(format, `\s*?`)
+	format = regexp.MustCompile(`{:we}`).ReplaceAllString(format, `(?:$|\s)+?`)
 
 	// Revert the temporary placeholders back to their original form
 	format = strings.ReplaceAll(format, `{{OPEN_BRACE}}`, `\{`)

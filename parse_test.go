@@ -1,6 +1,7 @@
 package parsenip
 
 import (
+	"github.com/stretchr/testify/assert"
 	"os"
 	"reflect"
 	"testing"
@@ -173,4 +174,54 @@ Colors: red, blue, green`
 	if !reflect.DeepEqual(results[0], expected) {
 		t.Errorf("expected %v, got %v", expected, results[0])
 	}
+}
+
+func TestParseCommandOptions(t *testing.T) {
+	command := "hashcat -o cracked.txt --debug-file debug.txt hashlist wordlist"
+	optionFormat := "-o {:s:o}{:we}"
+	result, err := Parse(optionFormat, command)
+	if err != nil {
+		t.Fatal("parsing given format")
+	}
+
+	assert.Equal(t, result[0]["o"], "cracked.txt")
+}
+
+func TestParseCommandOptionWhenOptionInTheEnd(t *testing.T) {
+	command := "hashcat --debug-file debug.txt hashlist wordlist -o cracked.txt"
+	optionFormat := "-o {:s:o}{:we}"
+	result, err := Parse(optionFormat, command)
+	if err != nil {
+		t.Fatal("parsing given format")
+	}
+
+	assert.Equal(t, result[0]["o"], "cracked.txt")
+}
+
+func TestParseCommandWithMultipleOptions(t *testing.T) {
+	command := "hashcat -a0 -m0 --status --status-timer=60 --rules-file rules.txt hashlist wordlist -o cracked.txt"
+	outputOptionFormat := "-o {:s:o}{:we}"
+	rulesFileOptionFormat := "--rules-file {:s:rules_file}{:we}"
+	statusTimeFormat := "--status-timer={:d:status_timer}{:we}"
+
+	result, err := Parse(outputOptionFormat, command)
+	if err != nil {
+		t.Fatal("parsing given format")
+	}
+
+	assert.Equal(t, result[0]["o"], "cracked.txt")
+
+	result, err = Parse(rulesFileOptionFormat, command)
+	if err != nil {
+		t.Fatal("parsing given format")
+	}
+
+	assert.Equal(t, result[0]["rules_file"], "rules.txt")
+
+	result, err = Parse(statusTimeFormat, command)
+	if err != nil {
+		t.Fatal("parsing given format")
+	}
+
+	assert.Equal(t, result[0]["status_timer"], 60)
 }
