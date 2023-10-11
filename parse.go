@@ -27,7 +27,7 @@ func Parse(format, target string) ([]map[string]interface{}, error) {
 	format = regexp.MustCompile(`{:a:(\w+)}`).ReplaceAllString(format, `(?P<${1}_a>.+)`)
 	format = regexp.MustCompile(`{:i}`).ReplaceAllString(format, `(?:.|\n)*?`)
 	format = regexp.MustCompile(`{:e}`).ReplaceAllString(format, `\s*?`)
-	format = regexp.MustCompile(`{:we}`).ReplaceAllString(format, `(?:$|\s)+?`)
+	format = regexp.MustCompile(`{:we}`).ReplaceAllString(format, `(?:$|\s|\t|\n)+?`)
 
 	// Revert the temporary placeholders back to their original form
 	format = strings.ReplaceAll(format, `{{OPEN_BRACE}}`, `\{`)
