@@ -1,11 +1,13 @@
 package parsenip
 
 import (
-	"fmt"
+	"errors"
 	"regexp"
 	"strconv"
 	"strings"
 )
+
+var ErrNoMatch = errors.New("no match")
 
 func Parse(format, target string) ([]map[string]interface{}, error) {
 	// Temporarily replace escaped braces with placeholder strings
@@ -37,7 +39,7 @@ func Parse(format, target string) ([]map[string]interface{}, error) {
 	matches := re.FindAllStringSubmatch(target, -1)
 
 	if matches == nil {
-		return nil, fmt.Errorf("no match")
+		return nil, ErrNoMatch
 	}
 
 	var results []map[string]interface{}
