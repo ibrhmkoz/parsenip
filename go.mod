@@ -1,4 +1,4 @@
-module github.com/ibrahim-koz/parsenip
+module github.com/ibrhmkoz/parsenip
 
 go 1.20
 
