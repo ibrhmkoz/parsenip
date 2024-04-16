@@ -9,7 +9,7 @@ The motivation behind Parsenip was to bring the type-level pattern matching capa
 
 To install the parsenip package, run the following command:
 
-`go get github.com/ibrahim-koz/parsenip`
+`go get github.com/ibrhmkoz/parsenip`
 
 ## Usage
 
